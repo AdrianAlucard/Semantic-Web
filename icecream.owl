@@ -1,0 +1,671 @@
+@prefix : <http://www.icecream.com/ontologies/icecream.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obda: <https://w3id.org/obda/vocabulary#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.icecream.com/ontologies/icecream.owl> .
+
+<http://www.icecream.com/ontologies/icecream.owl> rdf:type owl:Ontology ;
+                                                   rdfs:comment "This ontology describes ice cream flavors and ice cream sundaes"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.icecream.com/ontologies/icecream.owl#hasContainer
+:hasContainer rdf:type owl:ObjectProperty ;
+              rdfs:domain :Sundae ;
+              rdfs:range :Containers .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#hasIceCreamScoop
+:hasIceCreamScoop rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :hasIngredient ;
+                  owl:inverseOf :isIceCreamScoopOf ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :Containers
+                                              :Sundae
+                                            )
+                              ] ;
+                  rdfs:range :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#hasIngredient
+:hasIngredient rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               owl:inverseOf :isIngredientOf ;
+               rdf:type owl:TransitiveProperty .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#hasTopping
+:hasTopping rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :hasIngredient ;
+            owl:inverseOf :isToppingOf ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :Containers
+                                        :Sundae
+                                      )
+                        ] ;
+            rdfs:range :Toppings .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#isIceCreamScoopOf
+:isIceCreamScoopOf rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :isIngredientOf .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#isIngredientOf
+:isIngredientOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#isToppingOf
+:isToppingOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :isIngredientOf .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.icecream.com/ontologies/icecream.owl#AlmondJoySundae
+:AlmondJoySundae rdf:type owl:Class ;
+                 rdfs:subClassOf :NamedSundaes ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasIceCreamScoop ;
+                                   owl:someValuesFrom :ChocolateAlmondIceCream
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasTopping ;
+                                   owl:someValuesFrom :AlmondsTopping
+                                 ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#AlmondsTopping
+:AlmondsTopping rdf:type owl:Class ;
+                rdfs:subClassOf :NutTopping ;
+                owl:disjointWith :PecansTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#AppleSundae
+:AppleSundae rdf:type owl:Class ;
+             rdfs:subClassOf :NamedSundaes ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasIceCreamScoop ;
+                               owl:allValuesFrom :DutchAppleIceCream
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasTopping ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :CaramelTopping
+                             ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#AppleTopping
+:AppleTopping rdf:type owl:Class ;
+              rdfs:subClassOf :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BannanaSplitSundae
+:BannanaSplitSundae rdf:type owl:Class ;
+                    rdfs:subClassOf :NamedSundaes ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasIceCreamScoop ;
+                                      owl:qualifiedCardinality "3"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :IceCream
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasTopping ;
+                                      owl:qualifiedCardinality "3"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :BannanaTopping
+                                    ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BannanaTopping
+:BannanaTopping rdf:type owl:Class ;
+                rdfs:subClassOf :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BlueBerryIceCream
+:BlueBerryIceCream rdf:type owl:Class ;
+                   rdfs:subClassOf :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BlueberryTopping
+:BlueberryTopping rdf:type owl:Class ;
+                  rdfs:subClassOf :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ButterBasedIceCream
+:ButterBasedIceCream rdf:type owl:Class ;
+                     rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ButterCrunchIceCream
+:ButterCrunchIceCream rdf:type owl:Class ;
+                      rdfs:subClassOf :ButterBasedIceCream ;
+                      owl:disjointWith :ButterPecanIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ButterPecanIceCream
+:ButterPecanIceCream rdf:type owl:Class ;
+                     rdfs:subClassOf :ButterBasedIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ButterScotchSundae
+:ButterScotchSundae rdf:type owl:Class ;
+                    rdfs:subClassOf :NamedSundaes ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasTopping ;
+                                      owl:someValuesFrom :ButterScotchTopping
+                                    ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ButterScotchTopping
+:ButterScotchTopping rdf:type owl:Class ;
+                     rdfs:subClassOf :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#CaramelSundae
+:CaramelSundae rdf:type owl:Class ;
+               rdfs:subClassOf :NamedSundaes ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasTopping ;
+                                 owl:someValuesFrom :CaramelTopping
+                               ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#CaramelTopping
+:CaramelTopping rdf:type owl:Class ;
+                rdfs:subClassOf :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateAlmondIceCream
+:ChocolateAlmondIceCream rdf:type owl:Class ;
+                         rdfs:subClassOf :NuttyIceCreamIceCream ;
+                         owl:disjointWith :PistachioIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateChipCookieDoughIceCream
+:ChocolateChipCookieDoughIceCream rdf:type owl:Class ;
+                                  rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateChipIceCream
+:ChocolateChipIceCream rdf:type owl:Class ;
+                       rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateIceCream
+:ChocolateIceCream rdf:type owl:Class ;
+                   rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateSundae
+:ChocolateSundae rdf:type owl:Class ;
+                 rdfs:subClassOf :NamedSundaes ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasTopping ;
+                                   owl:someValuesFrom :HotFudgeTopping
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasIceCreamScoop ;
+                                   owl:allValuesFrom :ChocolateIceCream
+                                 ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateTopping
+:ChocolateTopping rdf:type owl:Class ;
+                  rdfs:subClassOf :SprinkleTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateySundae
+:ChocolateySundae rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasIceCreamScoop ;
+                                        owl:someValuesFrom [ rdf:type owl:Class ;
+                                                             owl:unionOf ( :ChocolateChipCookieDoughIceCream
+                                                                           :ChocolateChipIceCream
+                                                                           :ChocolateIceCream
+                                                                         )
+                                                           ]
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasTopping ;
+                                        owl:someValuesFrom :HotFudgeTopping
+                                      ] ;
+                  rdfs:subClassOf :Sundae .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#CoconutIceCream
+:CoconutIceCream rdf:type owl:Class ;
+                 rdfs:subClassOf :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ConeContainer
+:ConeContainer rdf:type owl:Class ;
+               rdfs:subClassOf :Containers ;
+               owl:disjointWith :DishContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#Containers
+:Containers rdf:type owl:Class .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#DishContainer
+:DishContainer rdf:type owl:Class ;
+               rdfs:subClassOf :Containers .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#DutchAppleIceCream
+:DutchAppleIceCream rdf:type owl:Class ;
+                    rdfs:subClassOf :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#DutchChocolateIceCream
+:DutchChocolateIceCream rdf:type owl:Class ;
+                        rdfs:subClassOf :ChocolateIceCream ;
+                        owl:disjointWith :RegularChocolateIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#FrenchVanillaIceCream
+:FrenchVanillaIceCream rdf:type owl:Class ;
+                       rdfs:subClassOf :VanillaIceIceCream ;
+                       owl:disjointWith :VanillaBeanIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#FruitTopping
+:FruitTopping rdf:type owl:Class ;
+              rdfs:subClassOf :Toppings .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#FruityIceCream
+:FruityIceCream rdf:type owl:Class ;
+                rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#FruitySundae
+:FruitySundae rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasIceCreamScoop ;
+                                    owl:someValuesFrom :FruityIceCream
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasTopping ;
+                                    owl:someValuesFrom :FruitTopping
+                                  ] ;
+              rdfs:subClassOf :Sundae .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#HotFudgeTopping
+:HotFudgeTopping rdf:type owl:Class ;
+                 rdfs:subClassOf :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#IceCream
+:IceCream rdf:type owl:Class .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LargeDishContainer
+:LargeDishContainer rdf:type owl:Class ;
+                    rdfs:subClassOf :DishContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LargeSugarConeContainer
+:LargeSugarConeContainer rdf:type owl:Class ;
+                         rdfs:subClassOf :SugarConeContainer ;
+                         owl:disjointWith :SmallSugarConeContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LargeWaffleConeContainer
+:LargeWaffleConeContainer rdf:type owl:Class ;
+                          rdfs:subClassOf :WaffleConeContainer ;
+                          owl:disjointWith :SmallWaffleConeContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LemonSherbertIceCream
+:LemonSherbertIceCream rdf:type owl:Class ;
+                       rdfs:subClassOf :SherbertIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LiquidMarshemlloTopping
+:LiquidMarshemlloTopping rdf:type owl:Class ;
+                         rdfs:subClassOf :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#MangoSherbertIceCream
+:MangoSherbertIceCream rdf:type owl:Class ;
+                       rdfs:subClassOf :SherbertIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#MasrhmelloTopping
+:MasrhmelloTopping rdf:type owl:Class ;
+                   rdfs:subClassOf :SprinkleTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#MediumDishContainer
+:MediumDishContainer rdf:type owl:Class ;
+                     rdfs:subClassOf :DishContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#NamedSundaes
+:NamedSundaes rdf:type owl:Class ;
+              rdfs:subClassOf :Sundae .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#NutTopping
+:NutTopping rdf:type owl:Class ;
+            rdfs:subClassOf :Toppings .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#NuttyIceCreamIceCream
+:NuttyIceCreamIceCream rdf:type owl:Class ;
+                       rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#NuttySundae
+:NuttySundae rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasTopping ;
+                                   owl:someValuesFrom :NutTopping
+                                 ] ;
+             rdfs:subClassOf :Sundae .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#OrangeSherbertIceCream
+:OrangeSherbertIceCream rdf:type owl:Class ;
+                        rdfs:subClassOf :SherbertIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PecansTopping
+:PecansTopping rdf:type owl:Class ;
+               rdfs:subClassOf :NutTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PinaColadaSundae
+:PinaColadaSundae rdf:type owl:Class ;
+                  rdfs:subClassOf :NamedSundaes ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasTopping ;
+                                    owl:someValuesFrom :PineappleTopping
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasIceCreamScoop ;
+                                    owl:allValuesFrom :CoconutIceCream
+                                  ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PineappleTopping
+:PineappleTopping rdf:type owl:Class ;
+                  rdfs:subClassOf :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PistachioIceCream
+:PistachioIceCream rdf:type owl:Class ;
+                   rdfs:subClassOf :NuttyIceCreamIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#RainbowTopping
+:RainbowTopping rdf:type owl:Class ;
+                rdfs:subClassOf :SprinkleTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#RegularChocolateIceCream
+:RegularChocolateIceCream rdf:type owl:Class ;
+                          rdfs:subClassOf :ChocolateIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SauceTopping
+:SauceTopping rdf:type owl:Class ;
+              rdfs:subClassOf :Toppings .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SherbertIceCream
+:SherbertIceCream rdf:type owl:Class ;
+                  rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SmallDishContainer
+:SmallDishContainer rdf:type owl:Class ;
+                    rdfs:subClassOf :DishContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SmallSugarConeContainer
+:SmallSugarConeContainer rdf:type owl:Class ;
+                         rdfs:subClassOf :SugarConeContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SmallWaffleConeContainer
+:SmallWaffleConeContainer rdf:type owl:Class ;
+                          rdfs:subClassOf :WaffleConeContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SprinkleTopping
+:SprinkleTopping rdf:type owl:Class ;
+                 rdfs:subClassOf :Toppings .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#StrawberryIceCream
+:StrawberryIceCream rdf:type owl:Class ;
+                    rdfs:subClassOf :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#StrawberrySundae
+:StrawberrySundae rdf:type owl:Class ;
+                  rdfs:subClassOf :NamedSundaes ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasTopping ;
+                                    owl:someValuesFrom :StrawberryTopping
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasIceCreamScoop ;
+                                    owl:allValuesFrom :StrawberryIceCream
+                                  ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#StrawberryTopping
+:StrawberryTopping rdf:type owl:Class ;
+                   rdfs:subClassOf :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SugarConeContainer
+:SugarConeContainer rdf:type owl:Class ;
+                    rdfs:subClassOf :ConeContainer ;
+                    owl:disjointWith :WaffleConeContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#Sundae
+:Sundae rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasIngredient ;
+                          owl:someValuesFrom :IceCream
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasTopping ;
+                          owl:someValuesFrom :WhipcreamTopping
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasTopping ;
+                          owl:someValuesFrom [ rdf:type owl:Class ;
+                                               owl:unionOf ( :FruitTopping
+                                                             :NutTopping
+                                                             :SauceTopping
+                                                           )
+                                             ]
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasContainer ;
+                          owl:allValuesFrom [ rdf:type owl:Class ;
+                                              owl:unionOf ( :DishContainer
+                                                            :WaffleConeContainer
+                                                          )
+                                            ]
+                        ] .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#Toppings
+:Toppings rdf:type owl:Class .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#VanillaBeanIceCream
+:VanillaBeanIceCream rdf:type owl:Class ;
+                     rdfs:subClassOf :VanillaIceIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#VanillaIceIceCream
+:VanillaIceIceCream rdf:type owl:Class ;
+                    rdfs:subClassOf :IceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#WaffleConeContainer
+:WaffleConeContainer rdf:type owl:Class ;
+                     rdfs:subClassOf :ConeContainer .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#WhipcreamTopping
+:WhipcreamTopping rdf:type owl:Class ;
+                  rdfs:subClassOf :Toppings .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AlmondJoySundae
+                :AppleSundae
+                :BannanaSplitSundae
+                :ButterScotchSundae
+                :CaramelSundae
+                :ChocolateSundae
+                :PinaColadaSundae
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AlmondJoySundae
+                :AppleSundae
+                :BannanaSplitSundae
+                :ButterScotchSundae
+                :CaramelSundae
+                :ChocolateSundae
+                :PinaColadaSundae
+                :StrawberrySundae
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AppleSundae
+                :BannanaSplitSundae
+                :ButterScotchSundae
+                :CaramelSundae
+                :ChocolateSundae
+                :PinaColadaSundae
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AppleTopping
+                :BannanaTopping
+                :BlueberryTopping
+                :PineappleTopping
+                :StrawberryTopping
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BlueBerryIceCream
+                :CoconutIceCream
+                :DutchAppleIceCream
+                :StrawberryIceCream
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BlueBerryIceCream
+                :DutchAppleIceCream
+                :StrawberryIceCream
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ButterBasedIceCream
+                :ChocolateChipCookieDoughIceCream
+                :ChocolateChipIceCream
+                :ChocolateIceCream
+                :FruityIceCream
+                :NuttyIceCreamIceCream
+                :SherbertIceCream
+                :VanillaIceIceCream
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ButterScotchTopping
+                :CaramelTopping
+                :HotFudgeTopping
+                :LiquidMarshemlloTopping
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ButterScotchTopping
+                :HotFudgeTopping
+                :LiquidMarshemlloTopping
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ChocolateTopping
+                :MasrhmelloTopping
+                :RainbowTopping
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Containers
+                :IceCream
+                :Sundae
+                :Toppings
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :FruitTopping
+                :NutTopping
+                :SauceTopping
+                :SprinkleTopping
+                :WhipcreamTopping
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :LargeDishContainer
+                :MediumDishContainer
+                :SmallDishContainer
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :LemonSherbertIceCream
+                :MangoSherbertIceCream
+                :OrangeSherbertIceCream
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
