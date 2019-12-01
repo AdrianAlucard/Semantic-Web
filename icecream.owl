@@ -57,7 +57,8 @@
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#isIngredientOf
-:isIngredientOf rdf:type owl:ObjectProperty .
+:isIngredientOf rdf:type owl:ObjectProperty ,
+                         owl:TransitiveProperty .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#isToppingOf
@@ -309,18 +310,33 @@
 
 ###  http://www.icecream.com/ontologies/icecream.owl#LargeDishContainer
 :LargeDishContainer rdf:type owl:Class ;
-                    rdfs:subClassOf :DishContainer .
+                    rdfs:subClassOf :DishContainer ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasIceCreamScoop ;
+                                      owl:qualifiedCardinality "3"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :IceCream
+                                    ] .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#LargeSugarConeContainer
 :LargeSugarConeContainer rdf:type owl:Class ;
-                         rdfs:subClassOf :SugarConeContainer ;
+                         rdfs:subClassOf :SugarConeContainer ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasIceCreamScoop ;
+                                           owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                           owl:onClass :IceCream
+                                         ] ;
                          owl:disjointWith :SmallSugarConeContainer .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#LargeWaffleConeContainer
 :LargeWaffleConeContainer rdf:type owl:Class ;
-                          rdfs:subClassOf :WaffleConeContainer ;
+                          rdfs:subClassOf :WaffleConeContainer ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :hasIceCreamScoop ;
+                                            owl:maxQualifiedCardinality "4"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :IceCream
+                                          ] ;
                           owl:disjointWith :SmallWaffleConeContainer .
 
 
@@ -346,7 +362,12 @@
 
 ###  http://www.icecream.com/ontologies/icecream.owl#MediumDishContainer
 :MediumDishContainer rdf:type owl:Class ;
-                     rdfs:subClassOf :DishContainer .
+                     rdfs:subClassOf :DishContainer ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasIceCreamScoop ;
+                                       owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :IceCream
+                                     ] .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#NamedSundaes
@@ -428,17 +449,32 @@
 
 ###  http://www.icecream.com/ontologies/icecream.owl#SmallDishContainer
 :SmallDishContainer rdf:type owl:Class ;
-                    rdfs:subClassOf :DishContainer .
+                    rdfs:subClassOf :DishContainer ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasIceCreamScoop ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :IceCream
+                                    ] .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#SmallSugarConeContainer
 :SmallSugarConeContainer rdf:type owl:Class ;
-                         rdfs:subClassOf :SugarConeContainer .
+                         rdfs:subClassOf :SugarConeContainer ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasIceCreamScoop ;
+                                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass :IceCream
+                                         ] .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#SmallWaffleConeContainer
 :SmallWaffleConeContainer rdf:type owl:Class ;
-                          rdfs:subClassOf :WaffleConeContainer .
+                          rdfs:subClassOf :WaffleConeContainer ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :hasIceCreamScoop ;
+                                            owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :IceCream
+                                          ] .
 
 
 ###  http://www.icecream.com/ontologies/icecream.owl#SprinkleTopping
