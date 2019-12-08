@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://www.Hamburger.com/ontologies/Hamburger.owl" uri="file:/C:/Users/Adrian/Documents/CCSU/Fall%202019/CS-407-Semantic-Web/Hamburger-ttl/Hamburger.owl"/>
+    <uri id="Imports Wizard Entry" name="http://www.taco.com/ontologies/taco.owl" uri="https://raw.githubusercontent.com/mcty/cs407semanticweb/master/p4t3.owl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""/>
+</catalog>
