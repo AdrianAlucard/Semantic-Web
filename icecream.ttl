@@ -1,0 +1,241 @@
+@prefix : <http://www.icecream.com/ontologies/icecream.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obda: <https://w3id.org/obda/vocabulary#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.icecream.com/ontologies/icecream.owl> .
+
+###  http://www.icecream.com/ontologies/icecream.owl#AlmondTopping
+:AlmondTopping rdf:type owl:NamedIndividual ,
+                        :NutTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#AppleSundae
+:AppleSundae rdf:type owl:NamedIndividual ,
+                      :Sundae ;
+             :hasContainer :SmallDish ;
+             :hasIceCreamScoop :DutchAppleIceCream ;
+             :hasTopping :AppleTopping ,
+                         :CaramelTopping ;
+             :hasCalories "850"^^xsd:int ;
+             :hasNuts "false"^^xsd:boolean ;
+             :hasPrice "6.5"^^xsd:double .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#AppleTopping
+:AppleTopping rdf:type owl:NamedIndividual ,
+                       :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BananaSplit
+:BananaSplit rdf:type owl:NamedIndividual ,
+                      :Sundae ;
+             :hasContainer :LargeDish ;
+             :hasIceCreamScoop :DutchChocolateIceCream ,
+                               :StrawberryIceCream ,
+                               :VanillaBeanIceCream ;
+             :hasTopping :AlmondTopping ,
+                         :BannanaTopping ;
+             :hasCalories "1230"^^xsd:int ;
+             :hasNuts "true"^^xsd:boolean ;
+             :hasPrice "13.5"^^xsd:double .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BannanaTopping
+:BannanaTopping rdf:type owl:NamedIndividual ,
+                         :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BlueBerryIceCream
+:BlueBerryIceCream rdf:type owl:NamedIndividual ,
+                            :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#BlueberryTopping
+:BlueberryTopping rdf:type owl:NamedIndividual ,
+                           :BerryTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ButterScotchTopping
+:ButterScotchTopping rdf:type owl:NamedIndividual ,
+                              :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#CaramelTopping
+:CaramelTopping rdf:type owl:NamedIndividual ,
+                         :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateAlmondIceCream
+:ChocolateAlmondIceCream rdf:type owl:NamedIndividual ,
+                                  :NuttyIceCreamIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateAlmondSundae
+:ChocolateAlmondSundae rdf:type owl:NamedIndividual ,
+                                :Sundae ;
+                       :hasContainer :LargeDish ;
+                       :hasIceCreamScoop :ChocolateAlmondIceCream ;
+                       :hasTopping :AlmondTopping ,
+                                   :HotFudgeTopping ;
+                       :hasCalories "800"^^xsd:int ;
+                       :hasPrice "8.5"^^xsd:double .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateChipCookieDoughIceCream
+:ChocolateChipCookieDoughIceCream rdf:type owl:NamedIndividual ,
+                                           :ChipIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateChipIceCream
+:ChocolateChipIceCream rdf:type owl:NamedIndividual ,
+                                :ChipIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateLoversSundae
+:ChocolateLoversSundae rdf:type owl:NamedIndividual ,
+                                :Sundae ;
+                       :hasContainer :LargeDish ;
+                       :hasIceCreamScoop :DutchChocolateIceCream ;
+                       :hasTopping :HotFudgeTopping ;
+                       :hasCalories "900"^^xsd:int ;
+                       :hasNuts "false"^^xsd:boolean ;
+                       :hasPrice "6.5"^^xsd:double .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#ChocolateTopping
+:ChocolateTopping rdf:type owl:NamedIndividual ,
+                           :SprinkleTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#CoconutIceCream
+:CoconutIceCream rdf:type owl:NamedIndividual ,
+                          :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#DicedMarshmelloTopping
+:DicedMarshmelloTopping rdf:type owl:NamedIndividual ,
+                                 :SprinkleTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#DutchAppleIceCream
+:DutchAppleIceCream rdf:type owl:NamedIndividual ,
+                             :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#DutchChocolateIceCream
+:DutchChocolateIceCream rdf:type owl:NamedIndividual ,
+                                 :ChocolateIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#FrenchVanillaIceCream
+:FrenchVanillaIceCream rdf:type owl:NamedIndividual ,
+                                :VanillaIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#HotFudgeTopping
+:HotFudgeTopping rdf:type owl:NamedIndividual ,
+                          :ChocolateSauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LargeDish
+:LargeDish rdf:type owl:NamedIndividual ,
+                    :DishContainer ;
+           :hasScoops "3"^^xsd:int .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LargeSugarCone
+:LargeSugarCone rdf:type owl:NamedIndividual ,
+                         :ConeContainer ;
+                :hasScoops "2"^^xsd:int .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LemonSherbertIceCream
+:LemonSherbertIceCream rdf:type owl:NamedIndividual ,
+                                :SherbertIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#LiquidMarshemelloTopping
+:LiquidMarshemelloTopping rdf:type owl:NamedIndividual ,
+                                   :SauceTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#MangoSherbertIceCream
+:MangoSherbertIceCream rdf:type owl:NamedIndividual ,
+                                :SherbertIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#MediumDish
+:MediumDish rdf:type owl:NamedIndividual ,
+                     :DishContainer ;
+            :hasScoops "2"^^xsd:int .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#OrangeSherbertIceCream
+:OrangeSherbertIceCream rdf:type owl:NamedIndividual ,
+                                 :SherbertIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PecanTopping
+:PecanTopping rdf:type owl:NamedIndividual ,
+                       :NutTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PineaColadaSundae
+:PineaColadaSundae rdf:type owl:NamedIndividual ,
+                            :Sundae ;
+                   :hasContainer :MediumDish ;
+                   :hasIceCreamScoop :CoconutIceCream ;
+                   :hasTopping :PineappleTopping ;
+                   :hasCalories "600"^^xsd:int ;
+                   :hasNuts "false"^^xsd:boolean ;
+                   :hasPrice "5.5"^^xsd:double .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PineappleTopping
+:PineappleTopping rdf:type owl:NamedIndividual ,
+                           :FruitTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#PistachioIceCream
+:PistachioIceCream rdf:type owl:NamedIndividual ,
+                            :NuttyIceCreamIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#RainbowTopping
+:RainbowTopping rdf:type owl:NamedIndividual ,
+                         :SprinkleTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#RegularChocolateIceCream
+:RegularChocolateIceCream rdf:type owl:NamedIndividual ,
+                                   :ChocolateIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SmallDish
+:SmallDish rdf:type owl:NamedIndividual ,
+                    :DishContainer ;
+           :hasScoops "1"^^xsd:int .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#SmallSugarCone
+:SmallSugarCone rdf:type owl:NamedIndividual ,
+                         :ConeContainer ;
+                :hasScoops "1"^^xsd:int .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#StrawberryIceCream
+:StrawberryIceCream rdf:type owl:NamedIndividual ,
+                             :FruityIceCream .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#StrawberryTopping
+:StrawberryTopping rdf:type owl:NamedIndividual ,
+                            :BerryTopping .
+
+
+###  http://www.icecream.com/ontologies/icecream.owl#VanillaBeanIceCream
+:VanillaBeanIceCream rdf:type owl:NamedIndividual ,
+                              :VanillaIceCream .
